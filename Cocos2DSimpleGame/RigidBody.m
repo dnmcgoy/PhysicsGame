@@ -42,10 +42,16 @@
         self.rotationalDrag = 0;
         
         self.points = [[NSMutableArray alloc] init];
-        self.prevPoints = [[NSArray alloc] init];
-        self.boundBox = [[NSArray alloc] init];
-        self.lastIntersection = [[NSArray alloc] init];
-        self.lastTile = [[NSArray alloc] init];
+        self.prevPoints = [[NSMutableArray alloc] init];
+        self.boundBox = [[NSMutableArray alloc] init];
+        self.lastIntersection = [[NSMutableArray alloc] init];
+        self.lastTile = [[NSMutableArray alloc] init];
+        
+        // DELETE THIS
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:0.0 andY:0.0]];
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:25.0 andY:50.0]];
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:50.0 andY:0.0]];
+        [self.points addObjectsFromArray:self.boundBox];
     }
     
     return self;
@@ -53,7 +59,7 @@
 
 -(void) updatePoints
 {
-	for(int i = 0; i < [self.points count]; i++)
+	for(int i = 0; i < [self.boundBox count]; i++)
 	{
         Vector2* point = [boundBox objectAtIndex:i];
 		point = [point vectorByRotationInDegrees:rotation];

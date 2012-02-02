@@ -41,6 +41,7 @@
 -(void)gameLoop:(ccTime)dt 
 {
     [self updatePhysics: dt];
+    [self.rigidBody updatePoints];
 }
 
 -(void)updatePhysics:(ccTime)dt
@@ -58,7 +59,7 @@
 
 -(void)drawRigidBodies
 {
-    for(int i = 0; [self.rigidBody.points count]; i++)
+    for(int i = 0; i < [self.rigidBody.points count]; i++)
 	{
         Vector2* pointA = [self.rigidBody.points objectAtIndex:i];
         Vector2* pointB = nil;
