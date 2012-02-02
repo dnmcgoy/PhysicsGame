@@ -41,7 +41,6 @@
 -(void)gameLoop:(ccTime)dt 
 {
     [self updatePhysics: dt];
-    [self draw];
 }
 
 -(void)updatePhysics:(ccTime)dt
@@ -73,6 +72,8 @@
             pointB = [self.rigidBody.points objectAtIndex:0];
 		}
         
+        glColor4f(0.8, 1.0, 0.76, 1.0);
+        glLineWidth(6.0f);
         ccDrawLine(ccp(pointA.x, pointA.y), ccp(pointB.x, pointB.y));
     }
 }
