@@ -18,9 +18,9 @@
     return self;
 }
 
--(id)initVector3WithX:(double)newX
-             Y:(double)newY
-             Z:(double)newZ
+-(id)initWithX:(double)newX
+          andY:(double)newY
+          andZ:(double)newZ
 {
     if (self = [super init])
     {
@@ -52,16 +52,16 @@
 
 -(Vector3*)vectorByMultiplication:(double)multiplier
 {
-	return [[Vector3 alloc] initVector3WithX:self.x * multiplier 
-                                    Y:self.y * multiplier 
-                                    Z:self.z * multiplier];
+	return [[Vector3 alloc] initWithX:self.x * multiplier 
+                                 andY:self.y * multiplier 
+                                 andZ:self.z * multiplier];
 }
 
 -(Vector3*)vectorByDivision:(double)divisor
 {
-	return [[Vector3 alloc] initVector3WithX:self.x / divisor
-                                    Y:self.y / divisor 
-                                    Z:self.z / divisor];
+	return [[Vector3 alloc] initWithX:self.x / divisor
+                                 andY:self.y / divisor 
+                                 andZ:self.z / divisor];
 }
 
 -(double)dotProductWithVector:(Vector3*)other
@@ -91,9 +91,9 @@
 -(Vector3*) vectorByNormalization
 {
 	double length = [self getLength];
-	return [[Vector3 alloc] initVector3WithX:self.x / length 
-                                    Y:self.y / length 
-                                    Z:self.z / length];
+	return [[Vector3 alloc] initWithX:self.x / length 
+                                 andY:self.y / length 
+                                 andZ:self.z / length];
 }
 
 -(NSString *)description

@@ -42,9 +42,9 @@
         self.rotationalDrag = 0;
         
         // DELETE THIS
-        [self.points addObject:[[Vector2 alloc] initWithX:0.0 Y:0.0]];
-        [self.points addObject:[[Vector2 alloc] initWithX:25.0 Y:50.0]];
-        [self.points addObject:[[Vector2 alloc] initWithX:50.0 Y:0.0]];
+        [self.points addObject:[[Vector2 alloc] initWithX:0.0 andY:0.0]];
+        [self.points addObject:[[Vector2 alloc] initWithX:25.0 andY:50.0]];
+        [self.points addObject:[[Vector2 alloc] initWithX:50.0 andY:0.0]];
     }
     
     return self;

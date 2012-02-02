@@ -8,7 +8,6 @@
 
 +(CCScene *) scene;
 -(void)updatePhysics: (ccTime)dt;
--(void)updateGraphics;
 -(void)drawRigidBodies;
 
 @property (nonatomic, retain) CCSprite* player;

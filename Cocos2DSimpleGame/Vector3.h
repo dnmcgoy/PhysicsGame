@@ -6,7 +6,7 @@
 @property double y;
 @property double z;
 
--(id)initVector3WithX:(double)newX Y:(double)newY Z:(double)newZ;
+-(id)initWithX:(double)newX andY:(double)newY andZ:(double)newZ;
 -(Vector3*)vectorByAddingVector:(Vector3*)other;
 -(Vector3*)vectorBySubtractingVector:(Vector3*)other;
 -(Vector3*)vectorByMultiplication:(double)multiplier;

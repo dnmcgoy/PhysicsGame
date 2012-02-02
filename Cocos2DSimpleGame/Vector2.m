@@ -17,7 +17,7 @@
 }
 
 -(id)initWithX:(double)newX
-             Y:(double)newY
+          andY:(double)newY
 {
     if (self = [super init])
     {
@@ -68,40 +68,40 @@
 -(Vector3*) vectorByCrossProductWithVector:(Vector2 *)other
 {
     return [[Vector3 alloc] initWithX:0 
-                             Y:0 
-                             Z:(self.x * other.y) - (self.y * other.x)];
+                                 andY:0 
+                                 andZ:(self.x * other.y) - (self.y * other.x)];
 }
 
 -(Vector2*) vectorByCrossProductWithZ
 {
 	Vector3* zAxis = [[Vector3 alloc] initWithX:0 
-                                              Y:0 
-                                              Z:1];
+                                           andY:0 
+                                           andZ:1];
     
 	Vector3* thisVector = [[Vector3 alloc] initWithX:self.x 
-                                            Y:self.y 
-                                            Z:0];
+                                                andY:self.y 
+                                                andZ:0];
     
 	Vector3* result = [thisVector vectorByCrossProductWithVector:zAxis];
     
 	return [[Vector2 alloc] initWithX:result.x 
-                                    Y:result.y];
+                                 andY:result.y];
 }
 
 -(Vector2*) vectorByCrossProductWithNegativeZ
 {
 	Vector3* zAxis = [[Vector3 alloc] initWithX:0 
-                                              Y:0 
-                                              Z:-1];
+                                           andY:0 
+                                           andZ:-1];
     
 	Vector3* thisVector = [[Vector3 alloc] initWithX:self.x 
-                                                   Y:self.y 
-                                                   Z:0];
+                                                andY:self.y 
+                                                andZ:0];
     
 	Vector3* result = [thisVector vectorByCrossProductWithVector:zAxis];
     
 	return [[Vector2 alloc] initWithX:result.x 
-                                    Y:result.y];
+                                 andY:result.y];
 }
 
 -(BOOL)isInteriorToVector:(Vector2*)other
@@ -125,24 +125,24 @@
     double newX = self.x / length;
     double newY = self.y / length;
 	return [[Vector2 alloc] initWithX:newX 
-                                    Y:newY];
+                                 andY:newY];
 }
 
 -(Vector2*) vectorByNormalToThisVector
 {
 	Vector3* zAxis = [[Vector3 alloc] initWithX:0 
-                                              Y:0 
-                                              Z:1];
+                                           andY:0 
+                                           andZ:1];
     
 	Vector3* thisVector = [[Vector3 alloc] initWithX:self.x 
-                                                   Y:self.y 
-                                                   Z:0];
+                                                andY:self.y 
+                                                andZ:0];
     
 	Vector3* normal = [zAxis vectorByCrossProductWithVector:thisVector];
 	normal = [normal vectorByNormalization];
     
     return [[Vector2 alloc] initWithX:normal.x 
-                                    Y:normal.y];
+                                 andY:normal.y];
 }
 
 -(Vector2*) vectorByRotationInDegrees:(double)degrees
@@ -151,7 +151,7 @@
     double newX = (self.x * cos(theta)) - (self.y * sin(theta));
     double newY = (self.y * cos(theta)) + (self.x * sin(theta));
 	return [[Vector2 alloc] initWithX:newX 
-                                    Y:newY];
+                                 andY:newY];
 }
 
 -(double) angleInDegreesWithVector:(Vector2*) other

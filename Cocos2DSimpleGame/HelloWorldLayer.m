@@ -27,7 +27,7 @@
         self.rigidBody = [[RigidBody alloc] init];
         
         self.rigidBody.position = [[Vector2 alloc] initWithX: winSize.width/2 + self.player.contentSize.width/2 
-                                                           Y: winSize.height];
+                                                        andY: winSize.height];
         
         self.player.position = ccp(self.rigidBody.position.x, self.rigidBody.position.y);
     }
