@@ -73,8 +73,8 @@
             pointB = [self.rigidBody.points objectAtIndex:0];
 		}
         
-        glColor4f(0.8, 1.0, 0.76, 1.0);
-        glLineWidth(6.0f);
+        glColor4f(1.0, 0.0, 0.0, 1.0);
+        glLineWidth(1.0f);
         ccDrawLine(ccp(pointA.x, pointA.y), ccp(pointB.x, pointB.y));
     }
 }

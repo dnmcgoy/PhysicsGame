@@ -48,9 +48,9 @@
         self.lastTile = [[NSMutableArray alloc] init];
         
         // DELETE THIS
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:0.0 andY:0.0]];
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:25.0 andY:50.0]];
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:50.0 andY:0.0]];
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:-25.0 andY:-25.0]];
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:0.0 andY:25.0]];
+        [self.boundBox addObject:[[Vector2 alloc] initWithX:25.0 andY:-25.0]];
         [self.points addObjectsFromArray:self.boundBox];
     }
     
