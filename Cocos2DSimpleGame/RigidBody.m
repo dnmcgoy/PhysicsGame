@@ -41,10 +41,11 @@
         self.rotationalAcceleration = 0;
         self.rotationalDrag = 0;
         
-        // DELETE THIS
-        [self.points addObject:[[Vector2 alloc] initWithX:0.0 andY:0.0]];
-        [self.points addObject:[[Vector2 alloc] initWithX:25.0 andY:50.0]];
-        [self.points addObject:[[Vector2 alloc] initWithX:50.0 andY:0.0]];
+        self.points = [[NSMutableArray alloc] init];
+        self.prevPoints = [[NSArray alloc] init];
+        self.boundBox = [[NSArray alloc] init];
+        self.lastIntersection = [[NSArray alloc] init];
+        self.lastTile = [[NSArray alloc] init];
     }
     
     return self;
