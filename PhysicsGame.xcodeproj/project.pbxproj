@@ -129,6 +129,13 @@
 		7D5F182614D8DD430010C706 /* RigidBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182514D8DD430010C706 /* RigidBody.m */; };
 		7D5F182914D8E8A20010C706 /* Physics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182814D8E8A20010C706 /* Physics.m */; };
 		7D5F182D14D9FE7F0010C706 /* Vector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182C14D9FE7E0010C706 /* Vector3.m */; };
+		E9A1740E14DD9BC2005A21DF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A1740D14DD9BC2005A21DF /* SenTestingKit.framework */; };
+		E9A1740F14DD9BC2005A21DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16A814D782280010C706 /* UIKit.framework */; };
+		E9A1741014DD9BC2005A21DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16AA14D782280010C706 /* Foundation.framework */; };
+		E9A1741614DD9BC2005A21DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9A1741414DD9BC2005A21DF /* InfoPlist.strings */; };
+		E9A1741914DD9BC2005A21DF /* VectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A1741814DD9BC2005A21DF /* VectorTest.m */; };
+		E9A1742114DD9FDA005A21DF /* Vector2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182214D78DF70010C706 /* Vector2.m */; };
+		E9A1742214DD9FF8005A21DF /* Vector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182C14D9FE7E0010C706 /* Vector3.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -378,6 +385,13 @@
 		7D5F182814D8E8A20010C706 /* Physics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Physics.m; sourceTree = "<group>"; };
 		7D5F182B14D9FE7E0010C706 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		7D5F182C14D9FE7E0010C706 /* Vector3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector3.m; sourceTree = "<group>"; };
+		E9A1740C14DD9BC2005A21DF /* VectorTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VectorTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A1740D14DD9BC2005A21DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E9A1741314DD9BC2005A21DF /* VectorTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VectorTest-Info.plist"; sourceTree = "<group>"; };
+		E9A1741514DD9BC2005A21DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E9A1741714DD9BC2005A21DF /* VectorTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorTest.h; sourceTree = "<group>"; };
+		E9A1741814DD9BC2005A21DF /* VectorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VectorTest.m; sourceTree = "<group>"; };
+		E9A1741A14DD9BC2005A21DF /* VectorTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VectorTest-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -396,6 +410,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9A1740814DD9BC2005A21DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A1740E14DD9BC2005A21DF /* SenTestingKit.framework in Frameworks */,
+				E9A1740F14DD9BC2005A21DF /* UIKit.framework in Frameworks */,
+				E9A1741014DD9BC2005A21DF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -403,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				7D5F16AE14D782280010C706 /* PhysicsGame */,
+				E9A1741114DD9BC2005A21DF /* VectorTest */,
 				7D5F169D14D782280010C706 /* Frameworks */,
 				7D5F169B14D782280010C706 /* Products */,
 			);
@@ -412,6 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				7D5F169A14D782280010C706 /* PhysicsGame.app */,
+				E9A1740C14DD9BC2005A21DF /* VectorTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,6 +453,7 @@
 				7D5F16A814D782280010C706 /* UIKit.framework */,
 				7D5F16AA14D782280010C706 /* Foundation.framework */,
 				7D5F16AC14D782280010C706 /* CoreGraphics.framework */,
+				E9A1740D14DD9BC2005A21DF /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -796,6 +823,26 @@
 			name = Math;
 			sourceTree = "<group>";
 		};
+		E9A1741114DD9BC2005A21DF /* VectorTest */ = {
+			isa = PBXGroup;
+			children = (
+				E9A1741714DD9BC2005A21DF /* VectorTest.h */,
+				E9A1741814DD9BC2005A21DF /* VectorTest.m */,
+				E9A1741214DD9BC2005A21DF /* Supporting Files */,
+			);
+			path = VectorTest;
+			sourceTree = "<group>";
+		};
+		E9A1741214DD9BC2005A21DF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9A1741314DD9BC2005A21DF /* VectorTest-Info.plist */,
+				E9A1741414DD9BC2005A21DF /* InfoPlist.strings */,
+				E9A1741A14DD9BC2005A21DF /* VectorTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -815,6 +862,24 @@
 			productName = Cocos2DSimpleGame;
 			productReference = 7D5F169A14D782280010C706 /* PhysicsGame.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E9A1740B14DD9BC2005A21DF /* VectorTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9A1741D14DD9BC2005A21DF /* Build configuration list for PBXNativeTarget "VectorTest" */;
+			buildPhases = (
+				E9A1740714DD9BC2005A21DF /* Sources */,
+				E9A1740814DD9BC2005A21DF /* Frameworks */,
+				E9A1740914DD9BC2005A21DF /* Resources */,
+				E9A1740A14DD9BC2005A21DF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VectorTest;
+			productName = VectorTest;
+			productReference = E9A1740C14DD9BC2005A21DF /* VectorTest.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -837,6 +902,7 @@
 			projectRoot = "";
 			targets = (
 				7D5F169914D782280010C706 /* PhysicsGame */,
+				E9A1740B14DD9BC2005A21DF /* VectorTest */,
 			);
 		};
 /* End PBXProject section */
@@ -861,7 +927,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9A1740914DD9BC2005A21DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A1741614DD9BC2005A21DF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9A1740A14DD9BC2005A21DF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7D5F169614D782280010C706 /* Sources */ = {
@@ -973,7 +1063,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9A1740714DD9BC2005A21DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A1742214DD9FF8005A21DF /* Vector3.m in Sources */,
+				E9A1742114DD9FDA005A21DF /* Vector2.m in Sources */,
+				E9A1741914DD9BC2005A21DF /* VectorTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E9A1741414DD9BC2005A21DF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9A1741514DD9BC2005A21DF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7D5F180A14D7822A0010C706 /* Debug */ = {
@@ -1044,6 +1155,52 @@
 			};
 			name = Release;
 		};
+		E9A1741B14DD9BC2005A21DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VectorTest/VectorTest-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "VectorTest/VectorTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E9A1741C14DD9BC2005A21DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VectorTest/VectorTest-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "VectorTest/VectorTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1064,6 +1221,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E9A1741D14DD9BC2005A21DF /* Build configuration list for PBXNativeTarget "VectorTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A1741B14DD9BC2005A21DF /* Debug */,
+				E9A1741C14DD9BC2005A21DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
