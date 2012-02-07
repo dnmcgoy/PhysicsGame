@@ -187,4 +187,9 @@
 	return [NSString stringWithFormat:@"Vector2: %f,%f", self.x, self.y];
 }
 
+-(Vector3*)toVector3
+{
+    return [[Vector3 alloc] initWithX:self.x andY:self.y andZ:0];
+}
+
 @end

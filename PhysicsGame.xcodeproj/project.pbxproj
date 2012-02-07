@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D25F20414DCC3400049ED6D /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F20314DCC3400049ED6D /* Line.m */; };
+		7D25F20714DCC4CD0049ED6D /* LineSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F20614DCC4CC0049ED6D /* LineSegment.m */; };
+		7D25F20A14DD7B570049ED6D /* Collision.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F20914DD7B560049ED6D /* Collision.m */; };
+		7D25F20D14DD80DC0049ED6D /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F20C14DD80DB0049ED6D /* Tile.m */; };
+		7D25F21014DD80E60049ED6D /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F20F14DD80E50049ED6D /* Map.m */; };
+		7D25F21414DD81C90049ED6D /* Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F21314DD81C90049ED6D /* Wall.m */; };
+		7D25F21714E0B9860049ED6D /* VelocityPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D25F21614E0B9860049ED6D /* VelocityPair.m */; };
 		7D5F169F14D782280010C706 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F169E14D782280010C706 /* QuartzCore.framework */; };
 		7D5F16A114D782280010C706 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16A014D782280010C706 /* OpenGLES.framework */; };
 		7D5F16A314D782280010C706 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16A214D782280010C706 /* OpenAL.framework */; };
@@ -132,6 +139,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D25F20214DCC3400049ED6D /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		7D25F20314DCC3400049ED6D /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
+		7D25F20514DCC4CC0049ED6D /* LineSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineSegment.h; sourceTree = "<group>"; };
+		7D25F20614DCC4CC0049ED6D /* LineSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineSegment.m; sourceTree = "<group>"; };
+		7D25F20814DD7B560049ED6D /* Collision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collision.h; sourceTree = "<group>"; };
+		7D25F20914DD7B560049ED6D /* Collision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collision.m; sourceTree = "<group>"; };
+		7D25F20B14DD80DB0049ED6D /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
+		7D25F20C14DD80DB0049ED6D /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tile.m; sourceTree = "<group>"; };
+		7D25F20E14DD80E50049ED6D /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		7D25F20F14DD80E50049ED6D /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
+		7D25F21214DD81C90049ED6D /* Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wall.h; sourceTree = "<group>"; };
+		7D25F21314DD81C90049ED6D /* Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wall.m; sourceTree = "<group>"; };
+		7D25F21514E0B9850049ED6D /* VelocityPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VelocityPair.h; sourceTree = "<group>"; };
+		7D25F21614E0B9860049ED6D /* VelocityPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VelocityPair.m; sourceTree = "<group>"; };
 		7D5F169A14D782280010C706 /* PhysicsGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhysicsGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D5F169E14D782280010C706 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7D5F16A014D782280010C706 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -399,6 +420,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D25F21114DD80F50049ED6D /* Level */ = {
+			isa = PBXGroup;
+			children = (
+				7D25F20E14DD80E50049ED6D /* Map.h */,
+				7D25F20F14DD80E50049ED6D /* Map.m */,
+				7D25F20B14DD80DB0049ED6D /* Tile.h */,
+				7D25F20C14DD80DB0049ED6D /* Tile.m */,
+				7D25F21214DD81C90049ED6D /* Wall.h */,
+				7D25F21314DD81C90049ED6D /* Wall.m */,
+			);
+			name = Level;
+			sourceTree = "<group>";
+		};
 		7D5F168F14D782270010C706 = {
 			isa = PBXGroup;
 			children = (
@@ -434,16 +468,17 @@
 		7D5F16AE14D782280010C706 /* PhysicsGame */ = {
 			isa = PBXGroup;
 			children = (
-				7D5F182A14D9FD940010C706 /* Math */,
 				7D5F180014D7822A0010C706 /* AppDelegate.h */,
 				7D5F180114D7822A0010C706 /* AppDelegate.m */,
-				7D5F180314D7822A0010C706 /* RootViewController.h */,
-				7D5F180414D7822A0010C706 /* RootViewController.m */,
+				7D5F180914D7822A0010C706 /* GameConfig.h */,
 				7D5F180614D7822A0010C706 /* HelloWorldLayer.h */,
 				7D5F180714D7822A0010C706 /* HelloWorldLayer.m */,
-				7D5F180914D7822A0010C706 /* GameConfig.h */,
-				7D5F16AF14D782280010C706 /* Resources */,
+				7D25F21114DD80F50049ED6D /* Level */,
 				7D5F16C314D782280010C706 /* libs */,
+				7D5F182A14D9FD940010C706 /* Math */,
+				7D5F16AF14D782280010C706 /* Resources */,
+				7D5F180314D7822A0010C706 /* RootViewController.h */,
+				7D5F180414D7822A0010C706 /* RootViewController.m */,
 				7D5F17FC14D7822A0010C706 /* Supporting Files */,
 			);
 			name = PhysicsGame;
@@ -473,15 +508,15 @@
 		7D5F16C314D782280010C706 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				7D5F17B914D7822A0010C706 /* LICENSE_cocos2d.txt */,
-				7D5F17C814D7822A0010C706 /* LICENSE_CocosDenshion.txt */,
-				7D5F17D314D7822A0010C706 /* LICENSE_TouchJSON.txt */,
-				7D5F17FB14D7822A0010C706 /* LICENSE_FontLabel.txt */,
 				7D5F16C414D782280010C706 /* cocos2d */,
 				7D5F17BA14D7822A0010C706 /* CocosDenshion */,
 				7D5F17C914D7822A0010C706 /* cocoslive */,
-				7D5F17D414D7822A0010C706 /* TouchJSON */,
 				7D5F17EA14D7822A0010C706 /* FontLabel */,
+				7D5F17B914D7822A0010C706 /* LICENSE_cocos2d.txt */,
+				7D5F17C814D7822A0010C706 /* LICENSE_CocosDenshion.txt */,
+				7D5F17FB14D7822A0010C706 /* LICENSE_FontLabel.txt */,
+				7D5F17D314D7822A0010C706 /* LICENSE_TouchJSON.txt */,
+				7D5F17D414D7822A0010C706 /* TouchJSON */,
 			);
 			name = libs;
 			sourceTree = "<group>";
@@ -784,6 +819,12 @@
 		7D5F182A14D9FD940010C706 /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				7D25F20814DD7B560049ED6D /* Collision.h */,
+				7D25F20914DD7B560049ED6D /* Collision.m */,
+				7D25F20214DCC3400049ED6D /* Line.h */,
+				7D25F20314DCC3400049ED6D /* Line.m */,
+				7D25F20514DCC4CC0049ED6D /* LineSegment.h */,
+				7D25F20614DCC4CC0049ED6D /* LineSegment.m */,
 				7D5F182714D8E8A20010C706 /* Physics.h */,
 				7D5F182814D8E8A20010C706 /* Physics.m */,
 				7D5F182414D8DD430010C706 /* RigidBody.h */,
@@ -792,6 +833,8 @@
 				7D5F182214D78DF70010C706 /* Vector2.m */,
 				7D5F182B14D9FE7E0010C706 /* Vector3.h */,
 				7D5F182C14D9FE7E0010C706 /* Vector3.m */,
+				7D25F21514E0B9850049ED6D /* VelocityPair.h */,
+				7D25F21614E0B9860049ED6D /* VelocityPair.m */,
 			);
 			name = Math;
 			sourceTree = "<group>";
@@ -970,6 +1013,13 @@
 				7D5F182614D8DD430010C706 /* RigidBody.m in Sources */,
 				7D5F182914D8E8A20010C706 /* Physics.m in Sources */,
 				7D5F182D14D9FE7F0010C706 /* Vector3.m in Sources */,
+				7D25F20414DCC3400049ED6D /* Line.m in Sources */,
+				7D25F20714DCC4CD0049ED6D /* LineSegment.m in Sources */,
+				7D25F20A14DD7B570049ED6D /* Collision.m in Sources */,
+				7D25F20D14DD80DC0049ED6D /* Tile.m in Sources */,
+				7D25F21014DD80E60049ED6D /* Map.m in Sources */,
+				7D25F21414DD81C90049ED6D /* Wall.m in Sources */,
+				7D25F21714E0B9860049ED6D /* VelocityPair.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1067,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Developer/Library/Frameworks",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Cocos2DSimpleGame/Prefix.pch;
@@ -1033,8 +1087,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Developer/Library/Frameworks",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Cocos2DSimpleGame/Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = Cocos2DSimpleGame/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
