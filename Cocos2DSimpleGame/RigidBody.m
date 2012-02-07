@@ -17,7 +17,7 @@
 @synthesize rotationalAcceleration;
 @synthesize rotationalDrag;
 @synthesize points;
-@synthesize prevPoints;
+@synthesize previousPoints;
 @synthesize boundBox;
 @synthesize lastIntersection;
 @synthesize lastTile;
@@ -42,23 +42,28 @@
         self.rotationalDrag = 0;
         
         self.points = [[NSMutableArray alloc] init];
-        self.prevPoints = [[NSMutableArray alloc] init];
+        self.previousPoints = [[NSMutableArray alloc] init];
         self.boundBox = [[NSMutableArray alloc] init];
         self.lastIntersection = [[NSMutableArray alloc] init];
         self.lastTile = [[NSMutableArray alloc] init];
-        
-        // DELETE THIS
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:-25.0 andY:-25.0]];
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:0.0 andY:25.0]];
-        [self.boundBox addObject:[[Vector2 alloc] initWithX:25.0 andY:-25.0]];
-        [self.points addObjectsFromArray:self.boundBox];
     }
     
     return self;
 }
 
+-(id)initWithVectorArray:(NSArray*)vectors
+{
+    [self init];
+    [boundBox arrayByAddingObjectsFromArray: vectors];
+    [self updatePoints];
+    return self;
+    
+}
+
 -(void) updatePoints
 {
+    [self storePreviousPoints];
+    
 	for(int i = 0; i < [self.boundBox count]; i++)
 	{
         Vector2* point = [boundBox objectAtIndex:i];
@@ -66,6 +71,12 @@
         point = [point vectorByAddingVector:position];
 		[points replaceObjectAtIndex:i withObject:point];
 	}
+}
+
+-(void) storePreviousPoints
+{
+    [self.previousPoints removeAllObjects];
+    [self.previousPoints arrayByAddingObjectsFromArray:points];
 }
 
 -(BOOL)containsPoint:(Vector2*)point

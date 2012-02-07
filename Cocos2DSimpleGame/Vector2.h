@@ -20,8 +20,9 @@
 -(double)distanceToVector:(Vector2*) other;
 -(Vector2*)vectorByNormalization;
 -(Vector2*)vectorByNormalToThisVector;
--(Vector2*) vectorByRotationInDegrees:(double)degrees;
--(double) angleInDegreesWithVector:(Vector2*) other;
--(Vector2*) vectorByProjectionOntoThisVector:(Vector2*) other;
+-(Vector2*)vectorByRotationInDegrees:(double)degrees;
+-(double)angleInDegreesWithVector:(Vector2*) other;
+-(Vector2*)vectorByProjectionOntoThisVector:(Vector2*) other;
+-(Vector3*)toVector3;
 
 @end

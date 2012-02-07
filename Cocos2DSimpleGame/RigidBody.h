@@ -3,7 +3,10 @@
 
 @interface RigidBody : NSObject
 
--(void) updatePoints;
+-(id)initWithVectorArray:(NSArray*)vectors;
+-(void)storePreviousPoints;
+-(void)updatePoints;
+-(BOOL)containsPoint:(Vector2*)point;
 
 @property BOOL hasGravity;
 @property double mass;
@@ -21,7 +24,7 @@
 @property double rotationalDrag;
 
 @property (nonatomic, retain) NSMutableArray* points;		//points and prevPoints store the ACTUAL position of bounding box points
-@property (nonatomic, retain) NSMutableArray* prevPoints;
+@property (nonatomic, retain) NSMutableArray* previousPoints;
 @property (nonatomic, retain) NSMutableArray* boundBox;	//boundBox stores the points relative to the object.
 @property (nonatomic, retain) NSMutableArray* lastIntersection;
 @property (nonatomic, retain) NSMutableArray* lastTile;
