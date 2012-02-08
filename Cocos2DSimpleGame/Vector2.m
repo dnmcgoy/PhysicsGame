@@ -145,6 +145,7 @@
                                  andY:normal.y];
 }
 
+// Counterclockwise
 -(Vector2*) vectorByRotationInDegrees:(double)degrees
 {
 	double theta = degrees * 3.14159 / 180.0;

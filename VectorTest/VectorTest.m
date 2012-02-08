@@ -140,6 +140,38 @@ Vector2* myVector;
     STAssertTrue(normal.y < 0.448, @"Testing vectorByNormalToThisVector: y was not less than 0.448");
 }
 
+-(void)testVectorByRotationInDegrees
+{
+    Vector2* rotated = [myVector vectorByRotationInDegrees:90];
+    STAssertTrue(rotated.x > -20.01, @"Testing vectorByRotationInDegrees: x was not greater than -20.01");
+    STAssertTrue(rotated.x < -19.99, @"Testing vectorByRotationInDegrees: x was not less than -19.99");
+    STAssertTrue(rotated.y > 9.99, @"Testing vectorByRotationInDegrees: y was not greater than 9.99");
+    STAssertTrue(rotated.y < 10.01, @"Testing vectorByRotationInDegrees: y was not less than -10.01");
+}
+
+-(void)testAngleInDegreesWithVector
+{
+    Vector2* other = [[Vector2 alloc] initWithX:-20 andY:10];
+    double angle = [myVector angleInDegreesWithVector:other];
+    STAssertTrue(angle > 89.99 && angle < 90.01, @"Testing angleInDegreesWithVector: angle was not 90");
+}
+
+-(void)testVectorByProjectionOntoThisVector
+{
+    Vector2* other = [[Vector2 alloc] initWithX:1 andY:0];
+    Vector2* projection = [myVector vectorByProjectionOntoThisVector:other];
+    STAssertTrue(projection.x > 0.19 && projection.x < 0.21, @"Testing vectorByProjectionOntoThisVector: x was not 0.2");
+    STAssertTrue(projection.y > 0.39 && projection.y < 0.41, @"Testing vectorByProjectionOntoThisVector: y was not 0.4");
+}
+
+-(void)testToVector3
+{
+    Vector3* vector3 = [myVector toVector3];
+    STAssertEquals(vector3.x, myVector.x, @"Testing toVector3: x was not equal");
+    STAssertEquals(vector3.y, myVector.y, @"Testing toVector3: y was not equal");
+    STAssertEquals(vector3.z, (double)0, @"Testing toVector3: z was not 0");
+}
+
 - (void)testVectorLength
 {
     double length = [myVector getLength];
