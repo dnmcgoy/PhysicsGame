@@ -6,7 +6,7 @@
 #import "Wall.h"
 #import "VelocityPair.h"
 
-#define GRAVITY -100
+#define GRAVITY 0
 #define PI 3.14159
 
 @interface Physics : NSObject

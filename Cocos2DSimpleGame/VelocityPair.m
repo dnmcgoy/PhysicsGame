@@ -13,4 +13,15 @@
 @synthesize velocity;
 @synthesize rotationalVelocity;
 
+-(id)init
+{
+    if (self = [super init])
+    {
+        velocity = [[Vector2 alloc] init];
+        rotationalVelocity = 0;
+    }
+    
+    return self;
+}
+
 @end

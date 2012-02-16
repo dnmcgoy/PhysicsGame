@@ -30,6 +30,8 @@
 -(void)addTile:(Tile*)tile
      toTileSet:(NSMutableArray*)tileSet;
 
+-(void)addTile:(Tile*)tile;
+
 @property (nonatomic, retain) NSMutableArray* tiles;
 
 @end

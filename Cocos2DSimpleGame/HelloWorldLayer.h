@@ -9,8 +9,10 @@
 +(CCScene *) scene;
 -(void)updatePhysics: (ccTime)dt;
 -(void)drawRigidBodies;
+-(void)drawMap;
 
 @property (nonatomic, retain) CCSprite* player;
 @property (nonatomic, retain) RigidBody* rigidBody;
+@property (nonatomic, retain) Map* map;
 
 @end

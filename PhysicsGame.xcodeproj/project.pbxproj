@@ -136,6 +136,7 @@
 		7D5F182614D8DD430010C706 /* RigidBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182514D8DD430010C706 /* RigidBody.m */; };
 		7D5F182914D8E8A20010C706 /* Physics.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182814D8E8A20010C706 /* Physics.m */; };
 		7D5F182D14D9FE7F0010C706 /* Vector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5F182C14D9FE7E0010C706 /* Vector3.m */; };
+		7DDA31B714E2226B0006CA50 /* RigidBodyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA31B614E2226B0006CA50 /* RigidBodyTest.m */; };
 		E9A1740E14DD9BC2005A21DF /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A1740D14DD9BC2005A21DF /* SenTestingKit.framework */; };
 		E9A1740F14DD9BC2005A21DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16A814D782280010C706 /* UIKit.framework */; };
 		E9A1741014DD9BC2005A21DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D5F16AA14D782280010C706 /* Foundation.framework */; };
@@ -406,6 +407,8 @@
 		7D5F182814D8E8A20010C706 /* Physics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Physics.m; sourceTree = "<group>"; };
 		7D5F182B14D9FE7E0010C706 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		7D5F182C14D9FE7E0010C706 /* Vector3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector3.m; sourceTree = "<group>"; };
+		7DDA31B514E2226B0006CA50 /* RigidBodyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RigidBodyTest.h; sourceTree = "<group>"; };
+		7DDA31B614E2226B0006CA50 /* RigidBodyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RigidBodyTest.m; sourceTree = "<group>"; };
 		E9A1740C14DD9BC2005A21DF /* VectorTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VectorTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A1740D14DD9BC2005A21DF /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E9A1741314DD9BC2005A21DF /* VectorTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VectorTest-Info.plist"; sourceTree = "<group>"; };
@@ -869,6 +872,8 @@
 		E9A1741114DD9BC2005A21DF /* VectorTest */ = {
 			isa = PBXGroup;
 			children = (
+				7DDA31B514E2226B0006CA50 /* RigidBodyTest.h */,
+				7DDA31B614E2226B0006CA50 /* RigidBodyTest.m */,
 				E9A1741714DD9BC2005A21DF /* VectorTest.h */,
 				E9A1741814DD9BC2005A21DF /* VectorTest.m */,
 				E9A1741214DD9BC2005A21DF /* Supporting Files */,
@@ -1120,6 +1125,7 @@
 				E9A1742214DD9FF8005A21DF /* Vector3.m in Sources */,
 				E9A1742114DD9FDA005A21DF /* Vector2.m in Sources */,
 				E9A1741914DD9BC2005A21DF /* VectorTest.m in Sources */,
+				7DDA31B714E2226B0006CA50 /* RigidBodyTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,6 +1294,7 @@
 				E9A1741C14DD9BC2005A21DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

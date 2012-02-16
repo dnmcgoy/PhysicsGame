@@ -12,6 +12,22 @@
 
 @synthesize tiles;
 
+-(id)init
+{
+    if (self = [super init])
+    {
+        self.tiles = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+-(void)addTile:(Tile*)tile
+{
+    [self.tiles addObject:tile];
+    [self sortTiles];
+}
+
 -(void)sortTiles
 {
     self.tiles = [[self.tiles sortedArrayUsingSelector:@selector(compare:)] mutableCopy];

@@ -18,8 +18,8 @@
 {
     if (self = [super init])
     {
-        self.position.x = newPosition.x * TILE_SIZE;
-        self.position.y = newPosition.y * TILE_SIZE;
+        self.position = [newPosition vectorByMultiplication:TILE_SIZE];
+        self.wall = [[Wall alloc] init];
         self.wall.w1 = [newWall.w1 vectorByMultiplication:TILE_SIZE];
         self.wall.w2 = [newWall.w2 vectorByMultiplication:TILE_SIZE];
     }

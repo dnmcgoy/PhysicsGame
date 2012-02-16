@@ -10,7 +10,7 @@
 #import "Vector2.h"
 #import "Wall.h"
 
-#define TILE_SIZE 10
+#define TILE_SIZE 40
 
 @interface Tile : NSObject
 

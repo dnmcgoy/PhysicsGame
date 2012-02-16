@@ -27,7 +27,7 @@
     if (self = [super init])
     {
         self.hasGravity = YES;
-        self.mass = 1.0f;
+        self.mass = 8000.0f;
         self.friction = 0;
         self.centerOfMass = [[Vector2 alloc] init];
         self.position = [[Vector2 alloc] init];
@@ -51,11 +51,29 @@
     return self;
 }
 
--(id)initWithVectorArray:(NSArray*)vectors
+-(id)initWithBoundingBox:(NSArray*)boundingBox
+             andPosition:(Vector2*)pos
 {
     [self init];
-    [boundBox arrayByAddingObjectsFromArray: vectors];
+    
+    self.points = [[NSMutableArray alloc] initWithCapacity:[boundingBox count]];
+    self.previousPoints = [[NSMutableArray alloc] initWithCapacity:[boundingBox count]];
+    self.boundBox = [[NSMutableArray alloc] initWithCapacity:[boundingBox count]];
+    self.lastIntersection = [[NSMutableArray alloc] initWithCapacity:[boundingBox count]];
+    self.lastTile = [[NSMutableArray alloc] initWithCapacity:[boundingBox count]];
+    
+    for(int i = 0; i < [boundingBox count]; i++)
+    {
+        // These are dummy points so the array is filled out to the right size
+        [self.lastIntersection addObject:[[Vector2 alloc] initWithX:-1 andY:-1]];
+        [self.lastTile addObject:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:-1 andY:-1] withWall:nil]];
+    }
+    
+    self.position.x = pos.x;
+    self.position.y = pos.y;
+    [boundBox addObjectsFromArray:boundingBox];
     [self updatePoints];
+    [self updatePoints]; // the second time fills in previousPoints
     return self;
     
 }
@@ -63,20 +81,25 @@
 -(void) updatePoints
 {
     [self storePreviousPoints];
+    [self.points removeAllObjects];
     
 	for(int i = 0; i < [self.boundBox count]; i++)
 	{
+        NSLog(@"***position: %f, %f", position.x, position.y);
         Vector2* point = [boundBox objectAtIndex:i];
+        NSLog(@"***point1: %f, %f", point.x, point.y);
 		point = [point vectorByRotationInDegrees:rotation];
+        NSLog(@"***point2: %f, %f", point.x, point.y);
         point = [point vectorByAddingVector:position];
-		[points replaceObjectAtIndex:i withObject:point];
+        NSLog(@"***point3: %f, %f", point.x, point.y);
+		[points addObject:point];
 	}
 }
 
 -(void) storePreviousPoints
 {
     [self.previousPoints removeAllObjects];
-    [self.previousPoints arrayByAddingObjectsFromArray:points];
+    [self.previousPoints addObjectsFromArray:points];
 }
 
 -(BOOL)containsPoint:(Vector2*)point
@@ -110,6 +133,11 @@
 	}
     
 	return YES;
+}
+
+-(NSString *)description
+{
+	return [NSString stringWithFormat:@"RigidBody: position - %f,%f  points - %d  previousPoints - %d", self.position.x, self.position.y, [self.points count], [self.previousPoints count]];
 }
 
 @end

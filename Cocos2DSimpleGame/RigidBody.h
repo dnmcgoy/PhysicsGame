@@ -1,9 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "Vector2.h"
+#import "Tile.h"
 
 @interface RigidBody : NSObject
 
--(id)initWithVectorArray:(NSArray*)vectors;
+-(id)initWithBoundingBox:(NSArray*)boundingBox andPosition:(Vector2*)pos;
 -(void)storePreviousPoints;
 -(void)updatePoints;
 -(BOOL)containsPoint:(Vector2*)point;
