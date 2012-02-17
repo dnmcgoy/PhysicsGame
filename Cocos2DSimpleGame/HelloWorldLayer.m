@@ -14,6 +14,14 @@
 	return scene;
 }
 
+-(void) addTileAtX:(int)x
+                 Y:(int)y
+          withWall:(Wall*)wall {
+    [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:x 
+                                                                         andY:y] 
+                                          withWall:wall]];
+}
+
 -(id) init
 {
     if( (self=[super initWithColor:ccc4(255,255,255,255)] ))
@@ -43,38 +51,38 @@
         Wall* topWall =    [[Wall alloc] initWithPointA:[[Vector2 alloc] initWithX:1 andY:0] andPointB:[[Vector2 alloc] initWithX:0 andY:0]];
         Wall* leftWall =   [[Wall alloc] initWithPointA:[[Vector2 alloc] initWithX:1 andY:1] andPointB:[[Vector2 alloc] initWithX:1 andY:0]];
         
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:1 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:2 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:3 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:4 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:5 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:6 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:7 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:8 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:9 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:10 andY:0] withWall:bottomWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:1] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:2] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:3] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:4] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:5] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:11 andY:6] withWall:rightWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:10 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:9 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:8 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:7 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:6 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:5 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:4 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:3 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:2 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:1 andY:7] withWall:topWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:6] withWall:leftWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:5] withWall:leftWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:4] withWall:leftWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:3] withWall:leftWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:2] withWall:leftWall]];
-        [self.map addTile:[[Tile alloc] initAtPosition:[[Vector2 alloc] initWithX:0 andY:1] withWall:leftWall]];
+        [self addTileAtX:1 Y:0 withWall:bottomWall];
+        [self addTileAtX:2 Y:0 withWall:bottomWall];
+        [self addTileAtX:3 Y:0 withWall:bottomWall];
+        [self addTileAtX:4 Y:0 withWall:bottomWall];
+        [self addTileAtX:5 Y:0 withWall:bottomWall];
+        [self addTileAtX:6 Y:0 withWall:bottomWall];
+        [self addTileAtX:7 Y:0 withWall:bottomWall];
+        [self addTileAtX:8 Y:0 withWall:bottomWall];
+        [self addTileAtX:9 Y:0 withWall:bottomWall];
+        [self addTileAtX:10 Y:0 withWall:bottomWall];
+        [self addTileAtX:11 Y:1 withWall:rightWall];
+        [self addTileAtX:11 Y:2 withWall:rightWall];
+        [self addTileAtX:11 Y:3 withWall:rightWall];
+        [self addTileAtX:11 Y:4 withWall:rightWall];
+        [self addTileAtX:11 Y:5 withWall:rightWall];
+        [self addTileAtX:11 Y:6 withWall:rightWall];
+        [self addTileAtX:10 Y:7 withWall:topWall];
+        [self addTileAtX:9 Y:7 withWall:topWall];
+        [self addTileAtX:8 Y:7 withWall:topWall];
+        [self addTileAtX:7 Y:7 withWall:topWall];
+        [self addTileAtX:6 Y:7 withWall:topWall];
+        [self addTileAtX:5 Y:7 withWall:topWall];
+        [self addTileAtX:4 Y:7 withWall:topWall];
+        [self addTileAtX:3 Y:7 withWall:topWall];
+        [self addTileAtX:2 Y:7 withWall:topWall];
+        [self addTileAtX:1 Y:7 withWall:topWall];
+        [self addTileAtX:0 Y:6 withWall:leftWall];
+        [self addTileAtX:0 Y:5 withWall:leftWall];
+        [self addTileAtX:0 Y:4 withWall:leftWall];
+        [self addTileAtX:0 Y:3 withWall:leftWall];
+        [self addTileAtX:0 Y:2 withWall:leftWall];
+        [self addTileAtX:0 Y:1 withWall:leftWall];
     }
     
     [self schedule:@selector(gameLoop:) interval:0.01666667];
