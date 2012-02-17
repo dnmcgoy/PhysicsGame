@@ -42,7 +42,7 @@
                 NSLog(@"correction: %f, %f", correction.x, correction.y);
             }*/
             
-			//[self applyCollision:collision toRigidBody:rigidBody overTimeDelta:timeDelta];
+			[self applyCollision:collision toRigidBody:rigidBody overTimeDelta:timeDelta];
 		}
     }
 }
