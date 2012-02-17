@@ -30,6 +30,18 @@
                                         isInsideOfRigidBody:rigidBody
                                               overTimeDelta:timeDelta];
             
+            /*for(int i = 0; i < [collision.collisions count]; i++)
+            {
+                Vector2* intersection = [collision.collisions objectAtIndex:i];
+                NSLog(@"intersection: %f, %f", intersection.x, intersection.y);
+                
+                Vector2* normal = [collision.normals objectAtIndex:i];
+                NSLog(@"normal: %f, %f", normal.x, normal.y);
+                
+                Vector2* correction = [collision.corrections objectAtIndex:i];
+                NSLog(@"correction: %f, %f", correction.x, correction.y);
+            }*/
+            
 			//[self applyCollision:collision toRigidBody:rigidBody overTimeDelta:timeDelta];
 		}
     }
@@ -60,6 +72,9 @@
             
             intersection = [wall pointByIntersectionWithLineSegment:path];
             
+            //NSLog(@"wall: %f,%f %f,%f", wall.v1.x, wall.v1.y, wall.v2.x, wall.v2.y);
+            //NSLog(@"path: %f,%f %f,%f", path.v1.x, path.v1.y, path.v2.x, path.v2.y);
+            
             if(intersection)
 			{
 				[rigidBody.lastTile replaceObjectAtIndex:i 
@@ -72,10 +87,15 @@
 			}
 		}
         
-        if(!intersection)
+        /*if(!intersection && ![map isPointInBounds:[rigidBody.points objectAtIndex:i]])
+        {
+            NSLog(@"crap . . .");
+        }*/
+        
+        /*if(!intersection)
         {
             continue;
-        }
+        }*/
         
 		// check if the point is out of bounds
 		if([map isPointInBounds:[rigidBody.points objectAtIndex:i]])
@@ -146,7 +166,15 @@
 			}
 		}
         
-        [collision.collisions addObject:intersection];
+        if(intersection)
+        {
+            [collision.collisions addObject:intersection];
+        }
+        else
+        {
+            [collision.collisions addObject:[rigidBody.lastIntersection objectAtIndex:i]];
+        }
+        
 		[collision.normals addObject:[wall vectorByNormalToThisVector]];
 		[collision.corrections addObject:correction];
 	}
@@ -167,7 +195,7 @@
     
     while (wallPoint = [wallEnumerator nextObject])
 	{
-		if([rigidBody containsPoint:wallPoint])
+		if(![rigidBody containsPoint:wallPoint])
 		{	
             continue;
         }
@@ -258,12 +286,28 @@
 	velocityCorrection = [velocityCorrection vectorByDivision:[collision.collisions count]];
 	rotationalVelocityCorrection /= [collision.collisions count];
     
+    //NSLog(@"positionCorrection: %f, %f", positionCorrection.x, positionCorrection.y);
+    //NSLog(@"count: %d", [collision.collisions count]);
+    
+    for(int i = 0; i < [rigidBody.points count]; i++)
+    {
+        Vector2* myPoint = [rigidBody.points objectAtIndex:i];
+        //NSLog(@"before: %f, %f", myPoint.x, myPoint.y);
+    }
+    
     rigidBody.position = [rigidBody.position vectorByAddingVector:positionCorrection];
     rigidBody.velocity = [rigidBody.velocity vectorByAddingVector:velocityCorrection];
 	rigidBody.rotationalVelocity += rotationalVelocityCorrection;
     
     Vector2* myPoint = [rigidBody.points objectAtIndex:2];
     [rigidBody updatePoints];
+    
+    for(int i = 0; i < [rigidBody.points count]; i++)
+    {
+        Vector2* myPoint = [rigidBody.points objectAtIndex:i];
+        //NSLog(@"after: %f, %f", myPoint.x, myPoint.y);
+    }
+    
     myPoint = [rigidBody.points objectAtIndex:2];
 }
 
@@ -318,7 +362,7 @@
     
     Vector3* cross = [r_ap vectorByCrossProductWithVector:normal];
 	
-    double moment = rigidBody.mass * pow([r_ap getLength], 2); // moment of inertia
+    double moment = rigidBody.mass * pow([r_ap getLength], 2) * 2; // moment of inertia
     double numerator = [[v_ap1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
     double denominator = 1;
     

@@ -349,7 +349,7 @@
         LineSegment* wallSegment = [[LineSegment alloc] initWithVectorA: absoluteWall.w1 
                                                                    andB:absoluteWall.w2];
         
-		if([vertical intersectsLineSegmentExclusive:wallSegment])
+		if([vertical intersectsLineSegmentInclusive:wallSegment])
 		{
 			intersections++;
 		}

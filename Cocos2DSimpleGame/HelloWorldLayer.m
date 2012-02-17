@@ -33,6 +33,7 @@
         [self.rigidBody storePreviousPoints];
         self.rigidBody.velocity.x = 50;
         self.rigidBody.velocity.y = 50;
+        self.rigidBody.hasGravity = YES;
         self.player.position = ccp(self.rigidBody.position.x, self.rigidBody.position.y);
         
         self.map = [[Map alloc] init];
@@ -97,6 +98,7 @@
     [Physics updateVelocityOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updatePositionOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updateRotationOfRigidBody:self.rigidBody overTimeDelta:dt];
+    [self.rigidBody updatePoints];
     [Physics correctCollisionsBetweenMap:self.map andRigidBody:self.rigidBody overTimeDelta:dt];
     [self.rigidBody updatePoints];
     
