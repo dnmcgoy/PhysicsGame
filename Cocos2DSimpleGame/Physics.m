@@ -365,7 +365,7 @@
     //NSLog(@"#### mass: %f", rigidBody.mass);
     
     // new velocity
-	Vector3* v_a2 = [v_a1 vectorByAddingVector:[[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass]];
+	Vector3* v_a2 = [[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass];
     //NSLog(@"#### v_a2: %f, %f, %f", v_a2.x, v_a2.y, v_a2.z);
     // new angular velocity
 	Vector3* omega_a2 = [[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment]; 

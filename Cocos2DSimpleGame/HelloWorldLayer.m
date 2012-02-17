@@ -31,7 +31,8 @@
                                                                   andY:200]];
         [self.rigidBody updatePoints];
         [self.rigidBody storePreviousPoints];
-        self.rigidBody.velocity.y = -100;
+        self.rigidBody.velocity.x = 50;
+        self.rigidBody.velocity.y = 50;
         self.player.position = ccp(self.rigidBody.position.x, self.rigidBody.position.y);
         
         self.map = [[Map alloc] init];
