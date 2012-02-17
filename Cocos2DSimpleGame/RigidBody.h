@@ -23,6 +23,7 @@
 @property double rotationalVelocity;
 @property double rotationalAcceleration;
 @property double rotationalDrag;
+@property float elasticity;
 
 @property (nonatomic, retain) NSMutableArray* points;		//points and prevPoints store the ACTUAL position of bounding box points
 @property (nonatomic, retain) NSMutableArray* previousPoints;

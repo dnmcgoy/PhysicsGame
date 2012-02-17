@@ -16,6 +16,7 @@
 @synthesize rotationalVelocity;
 @synthesize rotationalAcceleration;
 @synthesize rotationalDrag;
+@synthesize elasticity;
 @synthesize points;
 @synthesize previousPoints;
 @synthesize boundBox;
@@ -40,6 +41,7 @@
         self.rotationalVelocity = 0;
         self.rotationalAcceleration = 0;
         self.rotationalDrag = 0;
+        self.elasticity = 0.95f;
         
         self.points = [[NSMutableArray alloc] init];
         self.previousPoints = [[NSMutableArray alloc] init];

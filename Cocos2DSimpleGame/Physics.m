@@ -30,19 +30,7 @@
                                         isInsideOfRigidBody:rigidBody
                                               overTimeDelta:timeDelta];
             
-            /*for(int i = 0; i < [collision.collisions count]; i++)
-            {
-                Vector2* intersection = [collision.collisions objectAtIndex:i];
-                NSLog(@"intersection: %f, %f", intersection.x, intersection.y);
-                
-                Vector2* normal = [collision.normals objectAtIndex:i];
-                NSLog(@"normal: %f, %f", normal.x, normal.y);
-                
-                Vector2* correction = [collision.corrections objectAtIndex:i];
-                NSLog(@"correction: %f, %f", correction.x, correction.y);
-            }*/
-            
-			[self applyCollision:collision toRigidBody:rigidBody overTimeDelta:timeDelta];
+            [self applyCollision:collision toRigidBody:rigidBody overTimeDelta:timeDelta];
 		}
     }
 }
@@ -72,9 +60,6 @@
             
             intersection = [wall pointByIntersectionWithLineSegment:path];
             
-            //NSLog(@"wall: %f,%f %f,%f", wall.v1.x, wall.v1.y, wall.v2.x, wall.v2.y);
-            //NSLog(@"path: %f,%f %f,%f", path.v1.x, path.v1.y, path.v2.x, path.v2.y);
-            
             if(intersection)
 			{
 				[rigidBody.lastTile replaceObjectAtIndex:i 
@@ -87,17 +72,7 @@
 			}
 		}
         
-        /*if(!intersection && ![map isPointInBounds:[rigidBody.points objectAtIndex:i]])
-        {
-            NSLog(@"crap . . .");
-        }*/
-        
-        /*if(!intersection)
-        {
-            continue;
-        }*/
-        
-		// check if the point is out of bounds
+        // check if the point is out of bounds
 		if([map isPointInBounds:[rigidBody.points objectAtIndex:i]])
         {
             continue;
@@ -286,29 +261,10 @@
 	velocityCorrection = [velocityCorrection vectorByDivision:[collision.collisions count]];
 	rotationalVelocityCorrection /= [collision.collisions count];
     
-    //NSLog(@"positionCorrection: %f, %f", positionCorrection.x, positionCorrection.y);
-    //NSLog(@"count: %d", [collision.collisions count]);
-    
-    for(int i = 0; i < [rigidBody.points count]; i++)
-    {
-        Vector2* myPoint = [rigidBody.points objectAtIndex:i];
-        //NSLog(@"before: %f, %f", myPoint.x, myPoint.y);
-    }
-    
     rigidBody.position = [rigidBody.position vectorByAddingVector:positionCorrection];
     rigidBody.velocity = [rigidBody.velocity vectorByAddingVector:velocityCorrection];
 	rigidBody.rotationalVelocity += rotationalVelocityCorrection;
-    
-    Vector2* myPoint = [rigidBody.points objectAtIndex:2];
     [rigidBody updatePoints];
-    
-    for(int i = 0; i < [rigidBody.points count]; i++)
-    {
-        Vector2* myPoint = [rigidBody.points objectAtIndex:i];
-        //NSLog(@"after: %f, %f", myPoint.x, myPoint.y);
-    }
-    
-    myPoint = [rigidBody.points objectAtIndex:2];
 }
 
 // Body-to-wall reaction
@@ -362,7 +318,7 @@
     
     Vector3* cross = [r_ap vectorByCrossProductWithVector:normal];
 	
-    double moment = rigidBody.mass * pow([r_ap getLength], 2) * 2; // moment of inertia
+    double moment = rigidBody.mass * pow([r_ap getLength], 2); // moment of inertia
     double numerator = [[v_ap1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
     double denominator = 1;
     
@@ -383,10 +339,10 @@
     }
     
     // new velocity
-	Vector3* v_a2 = [[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass];
+	Vector3* v_a2 = [[[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass] vectorByMultiplication:rigidBody.elasticity];
     
     // new angular velocity
-	Vector3* omega_a2 = [[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment]; 
+	Vector3* omega_a2 = [[[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment] vectorByMultiplication:rigidBody.elasticity]; 
     
     result.velocity.x = v_a2.x;
 	result.velocity.y = v_a2.y;
