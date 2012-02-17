@@ -58,9 +58,6 @@
             LineSegment* wall = [[LineSegment alloc] initWithVectorA:absoluteWall.w1
                                                                 andB:absoluteWall.w2];
             
-            //NSLog(@"Path: %f,%f %f,%f", path.v1.x, path.v1.y, path.v2.x, path.v2.y);
-            //NSLog(@"Wall: %f,%f %f,%f", wall.v1.x, wall.v1.y, wall.v2.x, wall.v2.y);
-            
             intersection = [wall pointByIntersectionWithLineSegment:path];
             
             if(intersection)
@@ -77,11 +74,6 @@
         
         if(!intersection)
         {
-            if(![map isPointInBounds:[rigidBody.points objectAtIndex:i]])
-            {
-                //NSLog(@"!!!!!!! no intersection but point is out of bounds");
-            }
-            
             continue;
         }
         
@@ -110,13 +102,8 @@
 		Vector2* caster = [rigidBodyPoint vectorBySubtractingVector:absoluteWall.w1];
 		Vector2* projection = [wall vectorByProjectionOntoThisVector:caster];
 		Vector2* correction = [projection vectorBySubtractingVector:caster];
-        //NSLog(@"correction1: %f, %f", correction.x, correction.y);
-        //NSLog(@"projection: %f, %f", projection.x, projection.y);
-        //NSLog(@"caster: %f, %f", caster.x, caster.y);
-        //NSLog(@"wall: %f, %f", wall.x, wall.y);
-        //NSLog(@"rigidbody: %f, %f", rigidBodyPoint.x, rigidBodyPoint.y);
         
-		// projected point is on the line, but not the segment
+        // projected point is on the line, but not the segment
 		// so we need to project it again onto the neighboring wall
 		if(![wallSegment intersectsPoint:[projection vectorByAddingVector:absoluteWall.w1]])
 		{
@@ -150,13 +137,11 @@
 					caster = projection;
 					projection = [neighborWall vectorByProjectionOntoThisVector:caster];
 					correction = [correction vectorByAddingVector: [projection vectorBySubtractingVector:caster]];
-                    //NSLog(@"correction2: %f, %f", correction.x, correction.y);
-				}
+        		}
 				// otherwise, try to move the point to the shared wall point
 				else
                 {
                     correction = [closestWallPoint vectorBySubtractingVector:[rigidBody.points objectAtIndex:i]];
-                    //NSLog(@"correction3: %f, %f", correction.x, correction.y);
                 }
 			}
 		}
@@ -272,19 +257,14 @@
 	positionCorrection = [positionCorrection vectorByDivision:[collision.collisions count]];
 	velocityCorrection = [velocityCorrection vectorByDivision:[collision.collisions count]];
 	rotationalVelocityCorrection /= [collision.collisions count];
-    //NSLog(@"positionCorrection: %f, %f", positionCorrection.x, positionCorrection.y);
-	//[rigidBody updatePoints];
+    
     rigidBody.position = [rigidBody.position vectorByAddingVector:positionCorrection];
     rigidBody.velocity = [rigidBody.velocity vectorByAddingVector:velocityCorrection];
 	rigidBody.rotationalVelocity += rotationalVelocityCorrection;
     
     Vector2* myPoint = [rigidBody.points objectAtIndex:2];
-    //NSLog(@"$$$$ myPointBefore: %f, %f", myPoint.x, myPoint.y);
-	[rigidBody updatePoints];
+    [rigidBody updatePoints];
     myPoint = [rigidBody.points objectAtIndex:2];
-    //NSLog(@"$$$$ myPointBefore: %f, %f", myPoint.x, myPoint.y);
-	
-    //NSLog(@"***rigidBody position: %f, %f", rigidBody.position.x, rigidBody.position.y);
 }
 
 // Body-to-wall reaction
@@ -321,35 +301,33 @@
     
     // position
 	Vector3* p = [rigidBody.position toVector3];
-    //NSLog(@"#### p: %f, %f, %f", p.x, p.y, p.z);
+
     // cOfM velocity
 	Vector3* v_a1 = [rigidBody.velocity toVector3];	
-	//NSLog(@"#### v_a1: %f, %f, %f", v_a1.x, v_a1.y, v_a1.z);
+	
     // angular velocity
     Vector3* omega_a1 = [[Vector3 alloc] initWithX:0
                                               andY:0
                                               andZ:(PI * rigidBody.rotationalVelocity / 180)];
-    //NSLog(@"#### omega_a1: %f, %f, %f", omega_a1.x, omega_a1.y, omega_a1.z);
+    
     // vector from cOfM to collision point
 	Vector3* r_ap = [point vectorBySubtractingVector:p]; 
-    //NSLog(@"#### r_ap: %f, %f, %f", r_ap.x, r_ap.y, r_ap.z);
-	// velocity at collision point
-    Vector3* v_ap1 = [v_a1 vectorByAddingVector:[omega_a1 vectorByCrossProductWithVector:r_ap]]; 
-    //NSLog(@"#### v_ap1: %f, %f, %f", v_ap1.x, v_ap1.y, v_ap1.z);
-	Vector3* cross = [r_ap vectorByCrossProductWithVector:normal];
-	double moment = rigidBody.mass * pow([r_ap getLength], 2); // moment of inertia
     
-	double numerator = [[v_ap1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
-    //NSLog(@"#### numerator: %f", numerator);
+    // velocity at collision point
+    Vector3* v_ap1 = [v_a1 vectorByAddingVector:[omega_a1 vectorByCrossProductWithVector:r_ap]]; 
+    
+    Vector3* cross = [r_ap vectorByCrossProductWithVector:normal];
+	
+    double moment = rigidBody.mass * pow([r_ap getLength], 2); // moment of inertia
+    double numerator = [[v_ap1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
     double denominator = 1;
-    //NSLog(@"#### denominator: %f", denominator);
     
     if(rigidBody.mass != 0)
     {
         denominator = (1 / rigidBody.mass) + ([cross dotProductWithVector:cross] / moment);
     }
-    //NSLog(@"#### denominator: %f", denominator);
-	double impulse;
+    
+    double impulse;
     
 	if(denominator != 0)
     {
@@ -360,22 +338,15 @@
         impulse = 0;
     }
     
-    //NSLog(@"#### normal: %f, %f", normal.x, normal.y);
-    //NSLog(@"#### impulse: %f", impulse);
-    //NSLog(@"#### mass: %f", rigidBody.mass);
-    
     // new velocity
 	Vector3* v_a2 = [[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass];
-    //NSLog(@"#### v_a2: %f, %f, %f", v_a2.x, v_a2.y, v_a2.z);
+    
     // new angular velocity
 	Vector3* omega_a2 = [[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment]; 
-    //NSLog(@"#### omega_a2: %f, %f, %f", omega_a2.x, omega_a2.y, omega_a2.z);
-	result.velocity.x = v_a2.x;
+    
+    result.velocity.x = v_a2.x;
 	result.velocity.y = v_a2.y;
 	result.rotationalVelocity = 180 * omega_a2.z / PI;
-    
-    //NSLog(@"^^^^ result.velocity: %f, %f", result.velocity.x, result.velocity.y);
-    //NSLog(@"^^^^ result.rotationalVelocity: %f", result.rotationalVelocity);
     
     return result;
 }
@@ -390,7 +361,6 @@
 +(void)updateVelocityOfRigidBody:(RigidBody*)rigidBody
                    overTimeDelta:(double)timeDelta
 {
-    //NSLog(@"$$$$ velocity1: %f, %f", rigidBody.velocity.x, rigidBody.velocity.y);
     Vector2* dV = [rigidBody.acceleration vectorByMultiplication:timeDelta];
     rigidBody.velocity = [rigidBody.velocity vectorByAddingVector: dV];
 }

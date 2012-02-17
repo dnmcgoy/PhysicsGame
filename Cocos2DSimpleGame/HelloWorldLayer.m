@@ -85,8 +85,6 @@
 -(void)gameLoop:(ccTime)dt 
 {
     [self updatePhysics: dt];
-    
-    //NSLog(@"Rigidbody position: %f, %f", self.rigidBody.position.x, self.rigidBody.position.y); 
 }
 
 -(void)updatePhysics:(ccTime)dt
@@ -94,7 +92,6 @@
     [self.rigidBody storePreviousPoints];
     
     Vector2* myPoint = [self.rigidBody.previousPoints objectAtIndex:2];
-    //NSLog(@"previousPoint1: %f, %f", myPoint.x, myPoint.y);
     
     [Physics updateGravityOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updateVelocityOfRigidBody:self.rigidBody overTimeDelta:dt];
@@ -104,7 +101,6 @@
     [self.rigidBody updatePoints];
     
     myPoint = [self.rigidBody.previousPoints objectAtIndex:2];
-    //NSLog(@"previousPoint2: %f, %f", myPoint.x, myPoint.y);
 }
 
 -(void)draw

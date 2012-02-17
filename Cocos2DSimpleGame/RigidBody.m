@@ -27,7 +27,7 @@
     if (self = [super init])
     {
         self.hasGravity = YES;
-        self.mass = 8000.0f;
+        self.mass = 8.0f;
         self.friction = 0;
         self.centerOfMass = [[Vector2 alloc] init];
         self.position = [[Vector2 alloc] init];
