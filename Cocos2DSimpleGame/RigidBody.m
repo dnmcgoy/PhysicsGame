@@ -80,19 +80,14 @@
 
 -(void) updatePoints
 {
-    [self storePreviousPoints];
     [self.points removeAllObjects];
     
 	for(int i = 0; i < [self.boundBox count]; i++)
 	{
-        NSLog(@"***position: %f, %f", position.x, position.y);
         Vector2* point = [boundBox objectAtIndex:i];
-        NSLog(@"***point1: %f, %f", point.x, point.y);
-		point = [point vectorByRotationInDegrees:rotation];
-        NSLog(@"***point2: %f, %f", point.x, point.y);
+        point = [point vectorByRotationInDegrees:rotation];
         point = [point vectorByAddingVector:position];
-        NSLog(@"***point3: %f, %f", point.x, point.y);
-		[points addObject:point];
+        [points addObject:point];
 	}
 }
 

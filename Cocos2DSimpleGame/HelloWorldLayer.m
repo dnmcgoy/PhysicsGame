@@ -23,12 +23,14 @@
         
         [self addChild:self.player];
         NSMutableArray* boundingBox = [[NSMutableArray alloc] init];
-        [boundingBox addObject:[[Vector2 alloc] initWithX:-25 andY:-25]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:-25 andY:-30]];
         [boundingBox addObject:[[Vector2 alloc] initWithX:0 andY:25]];
-        [boundingBox addObject:[[Vector2 alloc] initWithX:25 andY:-30]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:25 andY:-25]];
         self.rigidBody = [[RigidBody alloc] initWithBoundingBox:boundingBox
                                 andPosition:[[Vector2 alloc] initWithX:220
                                                                   andY:200]];
+        [self.rigidBody updatePoints];
+        [self.rigidBody storePreviousPoints];
         self.rigidBody.velocity.y = -100;
         self.player.position = ccp(self.rigidBody.position.x, self.rigidBody.position.y);
         
@@ -82,17 +84,26 @@
 -(void)gameLoop:(ccTime)dt 
 {
     [self updatePhysics: dt];
-    [self.rigidBody updatePoints];
+    
     //NSLog(@"Rigidbody position: %f, %f", self.rigidBody.position.x, self.rigidBody.position.y); 
 }
 
 -(void)updatePhysics:(ccTime)dt
 {
+    [self.rigidBody storePreviousPoints];
+    
+    Vector2* myPoint = [self.rigidBody.previousPoints objectAtIndex:2];
+    //NSLog(@"previousPoint1: %f, %f", myPoint.x, myPoint.y);
+    
     [Physics updateGravityOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updateVelocityOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updatePositionOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics updateRotationOfRigidBody:self.rigidBody overTimeDelta:dt];
     [Physics correctCollisionsBetweenMap:self.map andRigidBody:self.rigidBody overTimeDelta:dt];
+    [self.rigidBody updatePoints];
+    
+    myPoint = [self.rigidBody.previousPoints objectAtIndex:2];
+    //NSLog(@"previousPoint2: %f, %f", myPoint.x, myPoint.y);
 }
 
 -(void)draw

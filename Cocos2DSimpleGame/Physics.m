@@ -10,18 +10,6 @@
                                         isInsideOfWallOnMap:map
                                               overTimeDelta:timeDelta];
     
-    for(int i = 0; i < [collision.collisions count]; i++)
-    {
-        Vector2* intersection = [collision.collisions objectAtIndex:i];
-        //NSLog(@"Intersection: %f, %f", intersection.x, intersection.y);
-        
-        Vector2* normal = [collision.normals objectAtIndex:i];
-        //NSLog(@"Normal: %f, %f", normal.x, normal.y);
-        
-        Vector2* correction = [collision.corrections objectAtIndex:i];
-        //NSLog(@"Correction: %f, %f", correction.x, correction.y);
-    }
-    
     [self applyCollision:collision
              toRigidBody:rigidBody 
            overTimeDelta:timeDelta];
@@ -59,9 +47,8 @@
 		// if the point is out of bounds, get the point at which it went out of bounds
 		LineSegment* path = [[LineSegment alloc] initWithVectorA:[rigidBody.points objectAtIndex:i] 
                                                             andB:[rigidBody.previousPoints objectAtIndex:i]];
-        
 		NSArray* tiles = [map getTilesCrossedByLineSegment:path];
-		Vector2* intersection = [[Vector2 alloc] initWithX:0 andY:0];
+		Vector2* intersection = nil;
 		
 		for(int j = 0; j < [tiles count]; j++)
 		{
@@ -70,6 +57,9 @@
 			
             LineSegment* wall = [[LineSegment alloc] initWithVectorA:absoluteWall.w1
                                                                 andB:absoluteWall.w2];
+            
+            //NSLog(@"Path: %f,%f %f,%f", path.v1.x, path.v1.y, path.v2.x, path.v2.y);
+            //NSLog(@"Wall: %f,%f %f,%f", wall.v1.x, wall.v1.y, wall.v2.x, wall.v2.y);
             
             intersection = [wall pointByIntersectionWithLineSegment:path];
             
@@ -87,13 +77,18 @@
         
         if(!intersection)
         {
+            if(![map isPointInBounds:[rigidBody.points objectAtIndex:i]])
+            {
+                //NSLog(@"!!!!!!! no intersection but point is out of bounds");
+            }
+            
             continue;
         }
         
 		// check if the point is out of bounds
 		if([map isPointInBounds:[rigidBody.points objectAtIndex:i]])
         {
-			continue;
+            continue;
         }
         
         Vector2* lastIntersection = [rigidBody.lastIntersection objectAtIndex:i];
@@ -277,13 +272,17 @@
 	positionCorrection = [positionCorrection vectorByDivision:[collision.collisions count]];
 	velocityCorrection = [velocityCorrection vectorByDivision:[collision.collisions count]];
 	rotationalVelocityCorrection /= [collision.collisions count];
+    //NSLog(@"positionCorrection: %f, %f", positionCorrection.x, positionCorrection.y);
+	//[rigidBody updatePoints];
+    rigidBody.position = [rigidBody.position vectorByAddingVector:positionCorrection];
+    rigidBody.velocity = [rigidBody.velocity vectorByAddingVector:velocityCorrection];
+	rigidBody.rotationalVelocity += rotationalVelocityCorrection;
     
-	rigidBody.position = [rigidBody.position vectorByAddingVector:positionCorrection];
-    //NSLog(@"^^^^ rigidBody.velocity1: %f, %f", rigidBody.velocity.x, rigidBody.velocity.y);
-	rigidBody.velocity = [rigidBody.velocity vectorByAddingVector:velocityCorrection];
-	//NSLog(@"^^^^ rigidBody.velocity2: %f, %f", rigidBody.velocity.x, rigidBody.velocity.y);
-    rigidBody.rotationalVelocity += rotationalVelocityCorrection;
+    Vector2* myPoint = [rigidBody.points objectAtIndex:2];
+    //NSLog(@"$$$$ myPointBefore: %f, %f", myPoint.x, myPoint.y);
 	[rigidBody updatePoints];
+    myPoint = [rigidBody.points objectAtIndex:2];
+    //NSLog(@"$$$$ myPointBefore: %f, %f", myPoint.x, myPoint.y);
 	
     //NSLog(@"***rigidBody position: %f, %f", rigidBody.position.x, rigidBody.position.y);
 }
@@ -366,7 +365,7 @@
     //NSLog(@"#### mass: %f", rigidBody.mass);
     
     // new velocity
-	Vector3* v_a2 = [[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass];
+	Vector3* v_a2 = [v_a1 vectorByAddingVector:[[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass]];
     //NSLog(@"#### v_a2: %f, %f, %f", v_a2.x, v_a2.y, v_a2.z);
     // new angular velocity
 	Vector3* omega_a2 = [[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment]; 
@@ -384,13 +383,6 @@
 +(void)updatePositionOfRigidBody:(RigidBody*)rigidBody
                    overTimeDelta:(double)timeDelta
 {
-	rigidBody.lastPosition = rigidBody.position;
-    
-    for(int i = 0; i < [rigidBody.points count]; i++)
-    {
-		[rigidBody.previousPoints replaceObjectAtIndex:i withObject:[rigidBody.points objectAtIndex:i]];
-    }
-    
 	rigidBody.position = [rigidBody.position vectorByAddingVector:[rigidBody.velocity vectorByMultiplication:timeDelta]];
     [rigidBody updatePoints];
 }
@@ -409,7 +401,7 @@
     rigidBody.lastRotation = rigidBody.rotation;
 	rigidBody.rotation += rigidBody.rotationalVelocity * timeDelta;
 	rigidBody.rotation = fmod(rigidBody.rotation + 360.0, 360.0);
-	//[rigidBody updatePoints];
+	[rigidBody updatePoints];
 }
 
 +(void)updateRotationalVelocityOfRigidBody:(RigidBody*)rigidBody
