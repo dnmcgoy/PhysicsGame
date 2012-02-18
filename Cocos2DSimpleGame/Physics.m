@@ -351,6 +351,227 @@
     return result;
 }
 
+// Ship-to-ship check
++(void)correctCollisionsBetweenRigidBodyA:(RigidBody*)rigidBodyA
+                            andRigidBodyB:(RigidBody*)rigidBodyB
+                            overTimeDelta:(double)timeDelta
+{
+    Vector2* deepestPoint = [[Vector2 alloc] initWithX:0
+                                                  andY:0];
+    
+	Vector2* deepestIntersection = [[Vector2 alloc] initWithX:0
+                                                         andY:0];
+    
+	Vector3* deepestNormal = nil;
+    BOOL collided = NO;
+	
+    NSEnumerator* pointEnumeratorA = [rigidBodyA.points objectEnumerator];
+    Vector2* pointA;
+    
+    while(pointA = [pointEnumeratorA nextObject])
+    {
+		if(![rigidBodyB containsPoint:pointA])
+		{
+            continue;
+        }
+        
+        Vector2* direction = nil;
+            
+        if([rigidBodyA.velocity getLength] > 10.1 || [rigidBodyA.points count] == 1)
+        {
+            direction = rigidBodyA.velocity;
+        }
+        else
+        {
+            direction = [pointA vectorBySubtractingVector:rigidBodyA.position];
+        }
+            
+        Line* path = [[Line alloc] initWithVectorA:[pointA vectorBySubtractingVector:direction]
+                                              andB:pointA];			
+            
+        for(int i = 0; i < [rigidBodyB.points count]; i++)
+        {
+            Vector2* pointB = [rigidBodyB.points objectAtIndex:i];
+            LineSegment* side = nil;
+                
+            if(i == ([rigidBodyB.points count] - 1))
+            {
+                side = [[LineSegment alloc] initWithVectorA:pointB 
+                                                       andB:[rigidBodyB.points objectAtIndex:0]];
+            }
+            else
+            {
+                side = [[LineSegment alloc] initWithVectorA:pointB
+                                                       andB:[rigidBodyB.points objectAtIndex:(i + 1)]];
+            }
+                
+            Vector3* side3D = [[Vector3 alloc] initWithX:(side.v2.x - side.v1.x)
+                                                    andY:(side.v2.y - side.v1.y) 
+                                                    andZ:0];
+                
+            Vector3* z = [[Vector3 alloc] initWithX:0 
+                                               andY:0 
+                                               andZ:1];
+				
+            Vector3* n = [side3D vectorByCrossProductWithVector:z];
+            
+            Vector2* normal = [[Vector2 alloc] initWithX:n.x 
+                                                    andY:n.y];
+				
+            // check if the path of an interior point crossed the current edge of rigidBodyB
+            if([side intersectsLine:path] && 
+               [normal angleInDegreesWithVector:direction] < 90 && 
+               [normal angleInDegreesWithVector:direction] > -90) 
+            {
+                Vector2* intersection = [side pointByIntersectionWithLine:path];
+                double currentDepth = [[pointA vectorBySubtractingVector:intersection] getLength];
+                double greatestDepth = [[deepestPoint vectorBySubtractingVector:deepestIntersection] getLength];
+                    
+                if(currentDepth > greatestDepth)
+                {
+                    collided = true;
+                    deepestPoint = pointA;
+                    deepestIntersection = intersection;
+                    deepestNormal = n;
+                }
+            }
+        }
+	}
+    
+	if(collided)
+    {
+        [self collideRigidBodyA:rigidBodyA
+                 withRigidBodyB:rigidBodyB
+               withDeepestPoint:deepestPoint
+        withDeepestIntersection:deepestIntersection
+              withDeepestNormal:deepestNormal
+                  overTimeDelta:timeDelta];
+    }
+}
+
++(void)collideRigidBodyA:(RigidBody*)rigidBodyA
+          withRigidBodyB:(RigidBody*)rigidBodyB
+        withDeepestPoint:(Vector2*)deepestPoint
+ withDeepestIntersection:(Vector2*)deepestIntersection
+       withDeepestNormal:(Vector3*)deepestNormal
+           overTimeDelta:(double)timeDelta
+{
+    if([rigidBodyA.velocity getLength] > [rigidBodyB.velocity getLength])
+    {
+		rigidBodyA.position = [rigidBodyA.position vectorByAddingVector:
+                               [[deepestIntersection vectorBySubtractingVector:deepestPoint] vectorByMultiplication:1.01f]];
+    }
+	else
+    {
+        rigidBodyB.position = [rigidBodyB.position vectorByAddingVector:
+                               [[deepestPoint vectorBySubtractingVector:deepestIntersection] vectorByMultiplication:1.01f]];
+    }
+    
+	rigidBodyA.rotation -= (rigidBodyA.rotationalVelocity * timeDelta);
+	rigidBodyB.rotation -= (rigidBodyB.rotationalVelocity * timeDelta);
+	[rigidBodyA updatePoints];
+	[rigidBodyB updatePoints];
+    
+    [self applyImpulseToRigidBodyA:rigidBodyA
+                     andRigidBodyB:rigidBodyB
+                           atPoint:[deepestIntersection toVector3]
+                        withNormal:deepestNormal];
+}
+
++(void)applyImpulseToRigidBodyA:(RigidBody*)rigidBodyA
+                  andRigidBodyB:(RigidBody*)rigidBodyB
+                        atPoint:(Vector3*)point
+                     withNormal:(Vector3*)normal
+{
+	double e = 1.0f;			
+    
+    
+    //****** RIGID BODY A
+    
+	Vector3* position_a = [rigidBodyA.position toVector3];
+    
+    // cOfM velocity
+	Vector3* v_a1 = [rigidBodyA.velocity toVector3];	
+	
+    // angular velocity
+    Vector3* omega_a1 = [[Vector3 alloc] initWithX:0
+                                              andY:0
+                                              andZ:(PI * rigidBodyA.rotationalVelocity / 180)];
+	
+    // vector from cOfM to collision point
+	Vector3* r_ap = [point vectorBySubtractingVector:position_a];
+    
+    // vector from cOfM to collision point
+	Vector3* v_ap1 = [v_a1 vectorByAddingVector:[omega_a1 vectorByCrossProductWithVector:r_ap]];
+    
+    
+	//****** RIGID BODY B
+    
+    Vector3* position_b = [rigidBodyB.position toVector3];
+	
+    // cOfM velocity
+    Vector3* v_b1 = [rigidBodyB.velocity toVector3];
+    
+    // angular velocity
+	Vector3* omega_b1 = [[Vector3 alloc] initWithX:0
+                                              andY:0
+                                              andZ:(PI * rigidBodyB.rotationalVelocity / 180)];
+    
+    // vector from cOfM to collision point
+	Vector3* r_bp = [point vectorBySubtractingVector:position_b];
+    
+    // velocity at collision point
+	Vector3* v_bp1 = [v_b1 vectorByAddingVector:[omega_b1 vectorByCrossProductWithVector:r_bp]];
+    
+	Vector3* v_ab1 = [v_ap1 vectorBySubtractingVector:v_bp1];
+    
+    
+    
+	Vector3* cross_a = [r_ap vectorByCrossProductWithVector:normal];
+	Vector3* cross_b = [r_bp vectorByCrossProductWithVector:normal];
+    
+    // FIXME: These moments of inertia are completely wrong
+	double moment_a = rigidBodyA.mass / 5;
+	double moment_b = rigidBodyB.mass / 5;
+    
+	double numerator = [[v_ab1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
+    
+	double denominator = ((1 / rigidBodyA.mass) + 
+                          (1 / rigidBodyB.mass) + 
+                          ([cross_a dotProductWithVector:cross_a] / moment_a) + 
+                          ([cross_b dotProductWithVector:cross_b] / moment_b));
+    
+	double impulse;
+    
+	if(denominator == 0)
+    {
+		impulse = 0;
+    }
+	else
+    {
+        impulse = numerator / denominator;
+    }
+    
+    // new velocity
+	Vector3* v_a2 = [v_a1 vectorByAddingVector:[normal vectorByMultiplication:(impulse / rigidBodyA.mass)]];
+	Vector3* v_b2 = [v_b1 vectorBySubtractingVector:[normal vectorByMultiplication:(impulse / rigidBodyB.mass)]];
+    
+    // new angular velocity
+	Vector3* omega_a2 = [omega_a1 vectorByAddingVector:
+                         [[r_ap vectorByCrossProductWithVector:[normal vectorByMultiplication:impulse]] vectorByDivision:moment_a]];
+    
+	Vector3* omega_b2 = [omega_b1 vectorBySubtractingVector:
+                         [[r_bp vectorByCrossProductWithVector:[normal vectorByMultiplication:impulse]] vectorByDivision:moment_b]];
+    
+	rigidBodyA.velocity.x = v_a2.x;
+	rigidBodyA.velocity.y = v_a2.y;
+	rigidBodyA.rotationalVelocity = 180 * omega_a2.z / PI;
+    
+	rigidBodyB.velocity.x = v_b2.x;
+	rigidBodyB.velocity.y = v_b2.y;
+	rigidBodyB.rotationalVelocity = 180 * omega_b2.z / PI;
+}
+
 +(void)updatePositionOfRigidBody:(RigidBody*)rigidBody
                    overTimeDelta:(double)timeDelta
 {

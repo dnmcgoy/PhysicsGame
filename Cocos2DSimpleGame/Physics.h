@@ -54,4 +54,20 @@
 +(void)updateDragOfRigidBody:(RigidBody*)rigidBody
                overTimeDelta:(double)timeDelta;
 
++(void)correctCollisionsBetweenRigidBodyA:(RigidBody*)rigidBodyA
+                            andRigidBodyB:(RigidBody*)rigidBodyB
+                            overTimeDelta:(double)timeDelta;
+
++(void)collideRigidBodyA:(RigidBody*)rigidBodyA
+          withRigidBodyB:(RigidBody*)rigidBodyB
+        withDeepestPoint:(Vector2*)deepestPoint
+ withDeepestIntersection:(Vector2*)deepestIntersection
+       withDeepestNormal:(Vector3*)deepestNormal
+           overTimeDelta:(double)timeDelta;
+
++(void)applyImpulseToRigidBodyA:(RigidBody*)rigidBodyA
+                  andRigidBodyB:(RigidBody*)rigidBodyB
+                        atPoint:(Vector3*)point
+                     withNormal:(Vector3*)normal;
+
 @end
