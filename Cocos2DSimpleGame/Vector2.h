@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "Vector3.h"
 
+#define MICRO 0.001
+
 @interface Vector2 : NSObject
 
 @property double x;

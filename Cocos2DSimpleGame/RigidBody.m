@@ -41,7 +41,7 @@
         self.rotationalVelocity = 0;
         self.rotationalAcceleration = 0;
         self.rotationalDrag = 0;
-        self.elasticity = 0.95f;
+        self.elasticity = 0.99f;
         
         self.points = [[NSMutableArray alloc] init];
         self.previousPoints = [[NSMutableArray alloc] init];

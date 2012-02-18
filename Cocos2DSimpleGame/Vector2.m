@@ -106,7 +106,8 @@
 
 -(BOOL)isInteriorToVector:(Vector2*)other
 {
-	return (self.x * other.y) - (self.y * other.x) < 0;
+    // It's best to err on the side of the point not being on the interior
+	return (self.x * other.y) - (self.y * other.x) < (0 - MICRO); 
 }
 
 -(double)getLength

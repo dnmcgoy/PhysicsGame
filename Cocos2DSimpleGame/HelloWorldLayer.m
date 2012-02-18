@@ -26,14 +26,17 @@
 {
     if( (self=[super initWithColor:ccc4(255,255,255,255)] ))
     {
-        self.player = [CCSprite spriteWithFile:@"Player.png" 
-                                          rect:CGRectMake(0, 0, 27, 40)];
+        self.player = [CCSprite spriteWithFile:@"football.png" 
+                                          rect:CGRectMake(0, 0, 48, 48)];
         
         [self addChild:self.player];
         NSMutableArray* boundingBox = [[NSMutableArray alloc] init];
-        [boundingBox addObject:[[Vector2 alloc] initWithX:-25 andY:-30]];
-        [boundingBox addObject:[[Vector2 alloc] initWithX:0 andY:25]];
-        [boundingBox addObject:[[Vector2 alloc] initWithX:25 andY:-25]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:-20 andY:-22]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:-20 andY:5]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:0 andY:22]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:20 andY:23]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:20 andY:0]];
+        [boundingBox addObject:[[Vector2 alloc] initWithX:0 andY:-20]];
         self.rigidBody = [[RigidBody alloc] initWithBoundingBox:boundingBox
                                 andPosition:[[Vector2 alloc] initWithX:220
                                                                   andY:200]];
@@ -116,7 +119,8 @@
 -(void)draw
 {
     self.player.position = ccp(self.rigidBody.position.x, self.rigidBody.position.y);
-    [self drawRigidBodies];
+    self.player.rotation = self.rigidBody.rotation * -1;
+    //[self drawRigidBodies];
     [self drawMap];
 }
 
