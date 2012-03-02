@@ -335,7 +335,7 @@
     // walls it intersects. If the number is odd, the point is in bounds.
     
 	NSArray* tilesBelow = [self getTilesBelowPoint:point];
-	Vector2* shadow = [[Vector2 alloc] initWithX:point.x andY:0];
+	Vector2* shadow = [[Vector2 alloc] initWithX:point.x andY:BOTTOM];
 	LineSegment* vertical = [[LineSegment alloc] initWithVectorA:point andB:shadow];
 
     NSEnumerator* tileEnumerator = [tilesBelow objectEnumerator];

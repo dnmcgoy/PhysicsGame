@@ -11,6 +11,8 @@
 #import "LineSegment.h"
 #import "Vector2.h"
 
+#define BOTTOM -99999
+
 @interface Map : NSObject
 
 //void init(char* mapFile);

@@ -22,8 +22,8 @@
 {
     if (self = [super init])
     {
-        self.v1 = vectorA;
-        self.v2 = vectorB;
+        self.v1 = [[Vector2 alloc] initWithX:vectorA.x andY:vectorA.y];
+        self.v2 = [[Vector2 alloc] initWithX:vectorB.x andY:vectorB.y];
         self.A = self.v2.y - self.v1.y;
         self.B = self.v1.x - self.v2.x;
         self.C = self.A * self.v1.x + self.B * self.v1.y;

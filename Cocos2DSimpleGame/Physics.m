@@ -62,7 +62,7 @@
             
             if(intersection)
 			{
-				[rigidBody.lastTile replaceObjectAtIndex:i 
+                [rigidBody.lastTile replaceObjectAtIndex:i 
                                               withObject:[tiles objectAtIndex:j]];
                 
 				[rigidBody.lastIntersection replaceObjectAtIndex:i 
@@ -297,7 +297,7 @@
 {
 	VelocityPair* result = [[VelocityPair alloc] init];
     
-	double e = 1.0f;			
+	double e = rigidBody.elasticity;			
     
     // position
 	Vector3* p = [rigidBody.position toVector3];
@@ -318,8 +318,8 @@
     
     Vector3* cross = [r_ap vectorByCrossProductWithVector:normal];
 	
-    double moment = rigidBody.mass * pow([r_ap getLength], 2); // moment of inertia
-    double numerator = [[v_ap1 vectorByMultiplication:(-1 * (1 + e))] dotProductWithVector:normal];
+    double moment = rigidBody.momentOfInertia;
+    double numerator = (-1 - e) * [v_ap1 dotProductWithVector:normal];
     double denominator = 1;
     
     if(rigidBody.mass != 0)
@@ -339,10 +339,10 @@
     }
     
     // new velocity
-	Vector3* v_a2 = [[[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass] vectorByMultiplication:rigidBody.elasticity];
+	Vector3* v_a2 = [[normal vectorByMultiplication:impulse] vectorByDivision:rigidBody.mass];
     
     // new angular velocity
-	Vector3* omega_a2 = [[[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment] vectorByMultiplication:rigidBody.elasticity]; 
+	Vector3* omega_a2 = [[r_ap vectorByCrossProductWithVector: [normal vectorByMultiplication:impulse]] vectorByDivision:moment]; 
     
     result.velocity.x = v_a2.x;
 	result.velocity.y = v_a2.y;
@@ -351,7 +351,6 @@
     return result;
 }
 
-// Ship-to-ship check
 +(void)correctCollisionsBetweenRigidBodyA:(RigidBody*)rigidBodyA
                             andRigidBodyB:(RigidBody*)rigidBodyB
                             overTimeDelta:(double)timeDelta
@@ -602,11 +601,13 @@
 }
 
 +(void)updateGravityOfRigidBody:(RigidBody*)rigidBody
+              withAccelerometer:(Vector3*)accelerometer
                   overTimeDelta:(double)timeDelta
 {
 	if(rigidBody.hasGravity)
     {
-        rigidBody.acceleration.y = GRAVITY;
+        rigidBody.acceleration.x = GRAVITY * accelerometer.y;
+        rigidBody.acceleration.y = GRAVITY * accelerometer.x * -1;
     }
 }
 

@@ -6,7 +6,7 @@
 #import "Wall.h"
 #import "VelocityPair.h"
 
-#define GRAVITY -200
+#define GRAVITY 200
 #define PI 3.14159
 
 @interface Physics : NSObject
@@ -49,6 +49,7 @@
                              overTimeDelta:(double)timeDelta;
 
 +(void)updateGravityOfRigidBody:(RigidBody*)rigidBody
+              withAccelerometer:(Vector3*)accelerometer
                   overTimeDelta:(double)timeDelta;
 
 +(void)updateDragOfRigidBody:(RigidBody*)rigidBody

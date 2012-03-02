@@ -4,6 +4,7 @@
 
 @synthesize hasGravity;
 @synthesize mass;
+@synthesize momentOfInertia;
 @synthesize friction;
 @synthesize centerOfMass;
 @synthesize position;
@@ -28,7 +29,8 @@
     if (self = [super init])
     {
         self.hasGravity = YES;
-        self.mass = 8.0f;
+        self.mass = 100.0f;
+        self.momentOfInertia = 0;
         self.friction = 0;
         self.centerOfMass = [[Vector2 alloc] init];
         self.position = [[Vector2 alloc] init];
@@ -41,7 +43,7 @@
         self.rotationalVelocity = 0;
         self.rotationalAcceleration = 0;
         self.rotationalDrag = 0;
-        self.elasticity = 0.99f;
+        self.elasticity = 0.60f;
         
         self.points = [[NSMutableArray alloc] init];
         self.previousPoints = [[NSMutableArray alloc] init];
@@ -76,6 +78,8 @@
     [boundBox addObjectsFromArray:boundingBox];
     [self updatePoints];
     [self updatePoints]; // the second time fills in previousPoints
+    [self calculateMomentOfInertia];
+    
     return self;
     
 }
@@ -89,6 +93,7 @@
         Vector2* point = [boundBox objectAtIndex:i];
         point = [point vectorByRotationInDegrees:rotation];
         point = [point vectorByAddingVector:position];
+        
         [points addObject:point];
 	}
 }
@@ -130,6 +135,34 @@
 	}
     
 	return YES;
+}
+
+-(void)calculateMomentOfInertia
+{
+    double sumNumerator = 0;
+    double sumDenominator = 0;
+    
+    for(int i = 0; i < ([self.boundBox count] - 1); i++)
+    {
+        Vector2* pointA = [self.boundBox objectAtIndex:i];
+        Vector2* pointB = [self.boundBox objectAtIndex:i + 1];
+        
+        double a = (pow(pointA.x, 2) + 
+                    pow(pointA.y, 2) + 
+                    (pointA.x * pointB.x) +
+                    (pointA.y * pointB.y) +
+                    pow(pointB.x, 2) +
+                    pow(pointB.y, 2));
+        
+        double b = ((pointA.x * pointB.y) -
+                    (pointB.x * pointA.y));
+        
+        sumNumerator += (a * b);
+        sumDenominator += b;
+    }
+    
+    self.momentOfInertia = (sumNumerator / sumDenominator) * (self.mass / 6);
+    NSLog(@"Moment of Inertia: %f", self.momentOfInertia);
 }
 
 -(NSString *)description

@@ -8,9 +8,11 @@
 -(void)storePreviousPoints;
 -(void)updatePoints;
 -(BOOL)containsPoint:(Vector2*)point;
+-(void)calculateMomentOfInertia;
 
 @property BOOL hasGravity;
 @property double mass;
+@property double momentOfInertia;
 @property double friction;
 @property (nonatomic, retain) Vector2* centerOfMass;
 @property (nonatomic, retain) Vector2* position;
